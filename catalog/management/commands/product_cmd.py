@@ -8,13 +8,13 @@ class Command(BaseCommand):
         product_list = [
             {
                 'name': 'диван',
-                'description': 'None',
+                'description': 'идеальный вариант для отдыха после работы',
                 'category': Category.objects.get(name='мягкая мебель'),
                 'price': '45000'
             },
             {
                 'name': 'кресло',
-                'description': 'None',
+                'description': 'компактный как стул, удобный как диван',
                 'category': Category.objects.get(name='мягкая мебель'),
                 'price': '13000'
             },
