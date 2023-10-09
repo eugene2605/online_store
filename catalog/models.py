@@ -9,6 +9,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Цена за покупку')
     date_of_creation = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Дата создания')
     date_last_modified = models.DateTimeField(auto_now=True, auto_now_add=False, verbose_name='Дата последнего изменения')
+    views_count = models.IntegerField(default=0, verbose_name='Просмотры')
 
     def __str__(self):
         return f'{self.name} {self.category} {self.price}'

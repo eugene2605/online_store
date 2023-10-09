@@ -1,0 +1,46 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="row">
+            <div class="col-5 px-5">
+                <img style="max-width: 540px;" src="/media/{{ object.image }}" />
+            </div>
+            <div class="col-5 px-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">
+                            {{ object.name|capfirst }}
+                        </h3>
+                        <h6 class="card-title text-center">
+                            {{ object.category|capfirst }}
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>Описание:</td>
+                                <td>{{ object.description|capfirst }}</td>
+                            </tr>
+                            <tr>
+                                <td>Цена:</td>
+                                <td>{{ object.price }} руб</td>
+                            </tr>
+                            <tr>
+                                <td>Дата создания:</td>
+                                <td>{{ object.date_of_creation }} руб</td>
+                            </tr>
+                            <tr>
+                                <td>Дата последнего изменения:</td>
+                                <td>{{ object.date_last_modified }} руб</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        Просмотры {{object.views_count }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
