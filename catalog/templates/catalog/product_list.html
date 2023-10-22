@@ -17,12 +17,19 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href = "{% url 'catalog:view_student' object.pk %}">{{ object.name|capfirst }}</a>
+                                    <a href = "{% url 'catalog:view_product' object.pk %}">{{ object.name|capfirst }}</a>
                                 </h5>
                                 <p class="card-text">{{ object.price }} руб</p>
                                 <p class="card-text">{{ object.description|capfirst }}</p>
                                 <p class="card-text">
-                                    <small class="text-body-secondary">Последнее обновление {{ object.date_last_modified }}</small>
+                                    <small class="text-body-secondary">
+                                        {% for version in object.version_set.all %}
+                                            {% if version.is_active %}
+                                                <p> Актуальная версия: {{ version.version_number }}</p>
+                                            {% endif %}
+                                        {% endfor %}
+                                        Последнее обновление {{ object.date_last_modified }}
+                                    </small>
                                 </p>
                             </div>
                         </div>
@@ -31,5 +38,8 @@
             </div>
         {% endfor %}
     </div>
+</div>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a class="p-2 btn btn-outline-success" href="{% url 'catalog:create_product' %}">Добавить новый товар</a>
 </div>
 {% endblock %}

@@ -58,7 +58,7 @@ class BlogUpdateView(UpdateView):
 
     def get_success_url(self):
         from django.urls import reverse
-        return reverse('blog:view_blog', args=[self.kwargs.get('slug')])
+        return reverse('blog:view_blog', args=[self.object.slug])
 
 
 class BlogDeleteView(DeleteView):

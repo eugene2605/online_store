@@ -1,5 +1,5 @@
 from django.contrib import admin
-from catalog.models import Product, Category, Contacts
+from catalog.models import *
 
 
 # При этом интерфейс вывода продуктов настройте так, чтобы можно было результат отображения фильтровать по категории,
@@ -21,3 +21,10 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Contacts)
 class ContactsAdmin(admin.ModelAdmin):
     list_display = ('id', 'country', 'inn', 'address')
+
+
+@admin.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'version_number', 'version_name', 'is_active')
+    list_filter = ('product',)
+    search_fields = ('product', 'version_number')

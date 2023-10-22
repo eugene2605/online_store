@@ -28,12 +28,20 @@
                             </tr>
                             <tr>
                                 <td>Дата создания:</td>
-                                <td>{{ object.date_of_creation }} руб</td>
+                                <td>{{ object.date_of_creation }}</td>
                             </tr>
                             <tr>
                                 <td>Дата последнего изменения:</td>
-                                <td>{{ object.date_last_modified }} руб</td>
+                                <td>{{ object.date_last_modified }}</td>
                             </tr>
+                            {% for version in object.version_set.all %}
+                                {% if version.is_active %}
+                                    <tr>
+                                        <td>Актуальная версия:</td>
+                                        <td>{{ version.version_number }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
                         </table>
                     </div>
                     <div class="card-footer">
@@ -42,5 +50,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="py-4 text-center">
+        <a class="p-2 btn btn-outline-success" href="{% url 'catalog:edit_product' object.pk %}">Редактировать товар</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:version_create' %}">Создать версию товара</a>
+        <a class="p-2 btn btn-outline-danger" href="{% url 'catalog:delete_product' object.pk %}">Удалить товар</a>
     </div>
 {% endblock %}
