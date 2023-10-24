@@ -1,6 +1,8 @@
 from django import forms
 from catalog.models import Product, Version
 
+FORBIDDEN_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
+
 
 class ProductForm(forms.ModelForm):
 
@@ -15,16 +17,14 @@ class ProductForm(forms.ModelForm):
 
     def clean_name(self):
         cleaned_data = self.cleaned_data['name']
-        forbidden_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
-        for word in forbidden_words:
+        for word in FORBIDDEN_WORDS:
             if word in cleaned_data:
                 raise forms.ValidationError('Наименование содержит запрещенные слова')
         return cleaned_data
 
     def clean_description(self):
         cleaned_data = self.cleaned_data['description']
-        forbidden_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
-        for word in forbidden_words:
+        for word in FORBIDDEN_WORDS:
             if word in cleaned_data:
                 raise forms.ValidationError('Описание содержит запрещенные слова')
         return cleaned_data

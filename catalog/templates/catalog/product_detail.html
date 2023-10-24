@@ -45,15 +45,18 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        Просмотры {{object.views_count }}
+                        Просмотры {{object.views_count }}<br>
+                        {{ object.owner }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="py-4 text-center">
+        {% if user.is_authenticated %}
         <a class="p-2 btn btn-outline-success" href="{% url 'catalog:edit_product' object.pk %}">Редактировать товар</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:version_create' %}">Создать версию товара</a>
         <a class="p-2 btn btn-outline-danger" href="{% url 'catalog:delete_product' object.pk %}">Удалить товар</a>
+        {% endif %}
     </div>
 {% endblock %}
