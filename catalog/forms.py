@@ -13,7 +13,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'image', 'category', 'price')
+        fields = ('name', 'description', 'image', 'category', 'price', 'is_published')
 
     def clean_name(self):
         cleaned_data = self.cleaned_data['name']
@@ -40,3 +40,10 @@ class VersionForm(forms.ModelForm):
     class Meta:
         model = Version
         fields = ('product', 'version_number', 'version_name', 'is_active')
+
+
+class ProductFormMod(ProductForm):
+
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
