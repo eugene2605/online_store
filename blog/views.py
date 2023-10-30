@@ -6,6 +6,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from pytils.translit import slugify
 
 from blog.models import Blog
+from blog.services import send_blog_email
 
 
 class BlogCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -38,12 +39,7 @@ class BlogDetailView(DetailView):
         self.object.views_count += 1
         self.object.save()
         if self.object.views_count == 100:
-            send_mail(
-                'Поздравляем!',
-                f'Поздравляем! Ваш блог "{self.object.title}" просмотрели 100 раз!',
-                settings.EMAIL_HOST_USER,
-                [settings.EMAIL_HOST_USER]
-            )
+            send_blog_email(self.object)
         return self.object
 
 
